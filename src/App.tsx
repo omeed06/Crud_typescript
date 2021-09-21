@@ -1,7 +1,10 @@
 import React, { useState } from "react";
 import { Table } from 'react-bootstrap';
 import { useForm } from "./useForm";
+// import { Button } from 'react-bootstrap';
 import 'bootstrap/dist/css/bootstrap.min.css';
+import { Form, Input, Button, Checkbox } from 'antd';
+import { UserOutlined, LockOutlined } from '@ant-design/icons';
 
 interface IUsers {
     email: string;
@@ -30,9 +33,11 @@ function App() {
         // don't mind this ugly form :P
         <>
         <form onSubmit={onSubmit}>
-            <div style={{ marginLeft: "400px"}}>
-                <h1>Form validation</h1>
-                <input
+            <div style={{ margin: "50px 500px 20px 500px"}}>
+                <h1 style={{marginLeft: "80px"}}>USER FORM</h1>
+                <h6 style={{fontWeight:"bold"}}> Enter your Email</h6>
+                <Input prefix={<UserOutlined className="site-form-item-icon" />}
+                
                     name='email'
                     id='email'
                     type='email'
@@ -41,8 +46,9 @@ function App() {
                 
                     required
                 />
-
-                <input
+                <h6 style={{fontWeight:"bold"}}> Enter your Password</h6>
+                    
+                <Input prefix={<LockOutlined className="site-form-item-icon" />}
                     name='password'
                     id='password'
                     type='password'
@@ -50,15 +56,35 @@ function App() {
                     onChange={onChange}
                     required
                 />
-                <button style={{ background: "Dodgerblue" }} type='submit'>SignUp</button>
+
+                    <Form.Item>
+                            <Form.Item name="remember" valuePropName="checked" noStyle>
+                            <Checkbox>Remember me</Checkbox>
+                            </Form.Item>
+
+                            <a className="login-form-forgot" href="">
+                            Forgot password
+                            </a>
+                    </Form.Item>
+
+
+
+                    <Form.Item>
+                    <Button type="primary" htmlType="submit" className="login-form-button">
+                    Log in
+                     </Button>
+                    Or <a href="">register now!</a>
+                    </Form.Item>
+
+
+
             </div>
             <div>
                 <br />
-                <br />
             </div>
         </form>
-            <Table style={{ backgroundColor: "MediumAquamarine" }} striped bordered hover size="sm">
-                <thead>
+            <Table striped bordered hover size="sm" variant="dark">
+                <thead style={{}}>
                     <tr>
                         <th>Email</th>
                         <th>Password</th>
@@ -73,8 +99,8 @@ function App() {
                         <tr>
                             <td>{value.email}</td>
                             <td>{value.password}</td>
-                            <td><button style={{background:"#C73F52"}} onClick={() =>onDelete(value)}>delete</button></td>
-                            <td><button style={{background:"#00FFFF"}} onClick={() =>onEdit(index)}>Edit</button></td>
+                            <td><Button style={{background:"#00FFFF"}} onClick={() =>onDelete(value)}>delete</Button></td>
+                            <td><Button style={{background:"#F44336"}} onClick={() =>onEdit(index)}>Edit</Button></td>
                         </tr>
                     ))}
                 </tbody>
