@@ -3,6 +3,7 @@ import { Table } from 'react-bootstrap';
 import { useForm } from "./useForm";
 // import { Button } from 'react-bootstrap';
 import 'bootstrap/dist/css/bootstrap.min.css';
+import Axios from "axios"
 import { Form, Input, Button, Checkbox } from 'antd';
 import { UserOutlined, LockOutlined } from '@ant-design/icons';
 
@@ -19,15 +20,9 @@ function App() {
     };
 
     // getting the event handlers from our custom hook
-    const { onChange, onSubmit, values, isSubmit,onDelete, data, onEdit } = useForm(
+    const { onChange, onSubmit, values, isSubmit,onDelete, data, onEdit,ApnaStyle,setApnaStyle } = useForm(
         initialState
     );
-
-    
-
-
-   
-    
 
     return (
         // don't mind this ugly form :P
@@ -83,7 +78,7 @@ function App() {
                 <br />
             </div>
         </form>
-            <Table striped bordered hover size="sm" variant="dark">
+            {/* <Table striped bordered hover size="sm" variant="dark">
                 <thead style={{}}>
                     <tr>
                         <th>Email</th>
@@ -96,11 +91,33 @@ function App() {
                 
                 <tbody>
                     {data?.map((value: IUsers, index:number) => (
+                        
                         <tr>
                             <td>{value.email}</td>
                             <td>{value.password}</td>
                             <td><Button style={{background:"#00FFFF"}} onClick={() =>onDelete(value)}>delete</Button></td>
                             <td><Button style={{background:"#F44336"}} onClick={() =>onEdit(index)}>Edit</Button></td>
+                        </tr>
+                    ))}
+                </tbody>
+            </Table> */}
+
+            <Table striped bordered hover size="sm" variant="dark">
+                <thead style={{}}>
+                    <tr>
+                        <th>Email</th>
+                        <th>Password</th>
+                        
+                    </tr>
+                </thead>
+                
+                <tbody>
+                    {ApnaStyle.map((ApnaStyle: any,
+                     index: any ) => (
+                        
+                        <tr>
+                            <td>{ApnaStyle.first_name}</td>
+                            <td>{ApnaStyle.last_name}</td>
                         </tr>
                     ))}
                 </tbody>

@@ -1,5 +1,6 @@
-import React, { useState } from "react";
 
+import React, { useState,useEffect } from "react";
+import  Axios  from 'axios';
 interface IUsers {
     email: string;
     password: string
@@ -12,6 +13,23 @@ export const useForm = (initialState: IUsers = { email: '', password: '', }) => 
     let [id, setId] = useState(0)
     let [isEditable, setIsEditable] = useState(false)
     let [isEditableIndex, setIsEditableIndex] = useState(0)
+
+    //  To get Api 
+    const [ApnaStyle, setApnaStyle] = useState([]);
+
+    const FetchData = async () => {
+      const { data } = await Axios.get(
+        "https://mocki.io/v1/0fbcc7fa-b8bb-4984-bf08-240b9296ad63"
+      );
+      const Dikhao_mujhe = data;
+      setApnaStyle(Dikhao_mujhe);
+      console.log(Dikhao_mujhe,"Dikhao mujhe");
+    };
+  
+    useEffect(() => {
+        FetchData();
+    }, []);
+  
 
     const [isSubmit, setIsSubmit] = React.useState(false)
     // onChange
@@ -63,6 +81,8 @@ export const useForm = (initialState: IUsers = { email: '', password: '', }) => 
         isSubmit,
         data,
         onDelete,
-        onEdit
+        onEdit,
+        ApnaStyle,
+        setApnaStyle
     };
 }
